@@ -8,7 +8,7 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true, on: :create
   validates :character, length: { maximum: 50 }
   validates :hobby, length: { maximum: 50 }
-  # validates :image, presence: true
+  validates :image, presence: true
 
   has_secure_password
   has_many :evaluations, dependent: :destroy
