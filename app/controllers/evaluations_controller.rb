@@ -1,4 +1,5 @@
 class EvaluationsController < ApplicationController
+  before_action :authenticate_user!
   helper_method :gain_point
   before_action :evaluatee_id, only: [:new, :create, :destroy]
 

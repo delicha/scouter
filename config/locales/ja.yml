@@ -21,8 +21,7 @@ ja:
         hobby: 趣味
         generation: 世代
         image: トップ画像
-        sub_image_1: サブ画像１
-        sub_image_2: サブ画像２
+        sub_images: サブ画像
         point: 所持ポイント
         created_at: 登録日
         updated_at: 更新日

@@ -1,12 +1,13 @@
-<h1><%= @user.name%>さんを測定する</h1>
+<h3><%= @user.name%>さんを測定する</h3>
 
-<i class="fa-solid fa-arrow-down-short-wide fa-3x text-info my-3"></i>
+<i class="fa-solid fa-arrow-down-short-wide fa-3x text-brown my-2"></i>
 
-<div class="impression-body">
-  <%= form_with model: @evaluation, class: "mx-3", local: false do |f| %>
+
+<%= form_with model: @evaluation, class: "mx-3", local: false do |f| %>
+  <div class="impression-body">
     <%= f.hidden_field :evaluatee_id, value: @id %> 
     <%= f.hidden_field :user_id, value: current_user.id %> 
-    <ul class="text-info">
+    <ul class="text-brown my-4">
       <li>
         <%= f.radio_button :evaluation_point, '1' %>
         <%= f.label :evaluation_point, 
@@ -68,10 +69,9 @@
         <%= render "bullet" %>
       </li>
     </ul>
-    <div>
-      <%= f.button :type => "submit", class: "btn btn-info btn-lg rounded-pill text-white" do %>
-        <i class="fa-solid fa-eye"></i> 測定する！
-      <% end %>
-    </div>
+  </div>
+  <%= f.button :type => "submit", class: "button02 mb-5" do %>
+    <i class="fa-solid fa-eye lead"></i>　<span class="lead"> 測 定！</span>
   <% end %>
-</div>
+<% end %>
+

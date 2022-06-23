@@ -12,20 +12,6 @@ services:
       - log-data:/scouter/log
     networks:
       - scouter-network
-  #   depends_on:
-  #     - db
-
-  # db:
-  #   image: postgres:13
-  #   environment:
-  #     POSTGRES_ROOT_PASSWORD: password
-  #     POSTGRES_USER: postgres
-  #     POSTGRES_PASSWORD: password
-  #     POSTGRES_DATABASE: scouter_development
-  #   volumes:
-  #     - db-data:/var/lib/postgresql/data
-  #   networks:
-  #     - scouter-network
 
   web:
     build:
@@ -39,6 +25,8 @@ services:
       - app
     networks:
       - scouter-network
+    stdin_open: true
+    tty: true
 
 volumes:
   public-data:

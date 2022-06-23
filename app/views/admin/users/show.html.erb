@@ -1,40 +1,60 @@
-<% provide(:title, "#{@user.name}さんのページ") %>
+<% provide(:title, "#{@user.name}") %>
 
-<p class="lead"><%= yield(:title) %></p>
 <div class="d-flex justify-content-center">
   <div class="col-sm-5">
-    <div class="card mb-3">
+    <div class="card-prof mb-5">
       <% if @user.image.attached? %>
-        <%= image_tag @user.image, class: 'card-img-top', alt: 'Card image cap' %>
+        <%= image_tag @user.image, class: 'card-prof-img', alt: 'Card image cap' %>
       <% else %>
         <%if @user.id == current_user.id %>
-          <%=image_tag mypage_demo_image, class: 'card-img-top', alt: 'Card image cap' %>
+          <%=image_tag mypage_demo_image, class: 'card-prof-img',alt: 'Card image cap' %>
         <% else %>
-          <%=image_tag user_demo_image, class: 'card-img-top', alt: 'Card image cap' %>
+          <%=image_tag user_demo_image, class: 'card-prof-img',alt: 'Card image cap' %>
         <% end %>
       <% end %>
-      <div class="card-body">
-        <p class="card-text"><span class="small text-muted"><%= User.human_attribute_name(:hobby) %>：</span><%= @user.hobby %></p>
-        <p class="card-text"><span class="small text-muted"><%= User.human_attribute_name(:character) %>：</span><%= @user.character %></p>
-        <p class="card-text"><span class="small text-muted"><%= User.human_attribute_name(:email) %>：</span><%= @user.email %></p>
-        <p class="card-text"><span class="small text-muted"><%= User.human_attribute_name(:sex) %>：</span><%= set_sex(@user) %></p>
-        <p class="card-text"><span class="small text-muted"><%= User.human_attribute_name(:generation) %>：</span><%= set_generation(@user) %></p>
-        <p class="card-text text-info font-weight-bold"><%= User.human_attribute_name(:point) %>：</span><span class="display-3"><%= @user.point %></span> pts</p>
+      <p class="lead pt-3"><%= yield(:title) %><br />
+        <span class="small text-muted">さん</small>
+      </p>
+      <div class="card-prof-content text-wine">
+        <div class="text-divider font-weight-bold text-dark pb-4">基本情報</div>
+        <p><span class="small text-dark"><%= User.human_attribute_name(:hobby) %>：　</span><%= @user.hobby %></p>
+        <p><span class="small text-dark"><%= User.human_attribute_name(:character) %>：　</span><%= @user.character %></p>
+        <% if current_user.id == @user.id || current_user.admin? %>
+          <p><span class="small text-dark"><%= User.human_attribute_name(:email) %>：　</span><%= @user.email %></p>
+          <p><span class="small text-dark"><%= User.human_attribute_name(:sex) %>：　</span><%= set_sex(@user) %></p>
+          <p><span class="small text-dark"><%= User.human_attribute_name(:generation) %>：　</span><%= set_generation(@user) %></p>
+          <p class="font-weight-bold text-dark mt-5"><%= image_tag "https://cdn.with.is/assets/shared/icons/point-13022b529ea3220c018a44897946eab5913d018375c5f482c11452b24a92b2bc.svg", width: "50" %>　<%= User.human_attribute_name(:point) %><br /><span class="display-3"><%= @user.point %></span></p>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
 <%# サブ画像ブロック %>
 <%= render "users/sub_pic" %>
+<%# 測定ブロック %>
+<% if @user.id != current_user.id %>
+  <%= link_to new_evaluation_path(user_id: current_user.id, evaluatee_id: @user.id), class: "button02" do %>
+    <i class="fa-solid fa-eye lead"></i> 測定！<small>(1ポイント獲得)</small>
+  <% end %>
+<% end %>
+
+<%# 5ポイント以上でプロフチェック %>
+<% if current_user.point >= 5 && @user.id != current_user.id %>
+  <div class="mt-4">
+    <span class="small text-brown"><%= no_evaluation %></small>
+    <%= link_to detais_user_path(user_id: @user.id), method: :post, class: "button04" do %><i class="fa-solid fa-address-card lead"></i> 評価を見る！<small>(5ポイント消化)</small><% end %>
+  </div>
+<% end %>
 
 <%# 印象ブロック %>
 <%= render "users/impression" %>
 
 <%# プロフの編集・削除 %>
 <div class="text-center">
-  <%= link_to edit_admin_user_path, class: "btn btn-info rounded-pill text-white mb-3" do %>
+  <%= link_to edit_user_registration_path, class: "btn btn-info rounded-pill text-white mb-3" do %>
     <i class="fa-solid fa-pen-to-square"></i> プロフィール編集<br />
   <% end %><br />
-  <%= link_to "退会させる", admin_user_path(@user), method: :delete, data: { confirm: "「#{@user.name}」さんを本当に退会させますか？"}, class: "small text-secondary" %>
+  <%= link_to "退会させる", user_path(@user.id), method: :delete, data: { confirm: "「#{@user.name}」さんを本当に退会させますか？"}, class: "small text-secondary" %>
 </div>
+
 

@@ -1,19 +1,21 @@
 <nav class="navbar navbar-expand-lg navbar-light border-bottom bg-white fixed-top">
-  <%= link_to 'Scouter', users_path, class: 'navbar-brand logo' %>
+  <%= link_to 'Scouter', root_path, class: 'navbar-brand logo' %>
   <ul class="navbar-nav mr-auto mt-2 mt-lg-0 flex-row d-flex justify-content-center">
       <% if current_user %>
-        <li class="nav_item"><%= link_to user_path(current_user), class: 'nav-link' do %><i class="fa-solid fa-user lead"></i><% end %></li>
-        <li class="nav_item"><%= link_to users_path, class: 'nav-link' do %><i class="fa-solid fa-compass lead"><% end %></i></li>
+        <li class="nav_item"><%= link_to user_path(current_user), class: 'nav-link' do %><i class="fa-solid fa-user lead text-chocolate"></i><% end %></li>
+        <li class="nav_item"><%= link_to users_path, class: 'nav-link' do %><i class="fa-solid fa-compass lead text-chocolate"><% end %></i></li>
 
-        <% if current_user.admin %>
-          <li class="nav_item"><%= link_to admin_users_path, class: 'nav-link' do %><i class="fa-solid fa-id-card lead"></i><% end %></li>
-          <li class="nav_item"><%= link_to admin_evaluation_path, class: 'nav-link' do %><i class="fa-solid fa-chart-simple lead"></i><% end %></li>
+        <% if current_user.admin? %>
+          <li class="nav_item"><%= link_to admin_users_path, class: 'nav-link' do %><i class="fa-solid fa-id-card lead text-chocolate"></i><% end %></li>
+          <li class="nav_item"><%= link_to admin_evaluation_path, class: 'nav-link' do %><i class="fa-solid fa-chart-simple lead text-chocolate"></i><% end %></li>
         <% end %>
 
-        <li class="nav_item"><%= link_to logout_path, method: :delete, class: 'nav-link' do %><i class="fa-solid fa-door-open lead"></i><% end %></li>
+        <li class="nav_item"><%= link_to destroy_user_session_path, method: :delete, class: 'nav-link' do %><i class="fa-solid fa-door-open lead text-chocolate"></i><% end %></li>
 
       <% else %>
-        <p><%= link_to login_path, class: 'btn btn-info rounded-pill text-white' do %><i class="fa-solid fa-right-to-bracket lead"></i>　ログイン<% end %></p>
+  
+        <li class="nav_item py-4"></li>
+        
       <% end %>
     </ul>
 </nav>

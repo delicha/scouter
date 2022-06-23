@@ -1,104 +1,29 @@
-<% if !current_user %>
-  <% provide(:title, "トップページ") %>
+ <% provide(:title, "スカウター一覧") %>
 
-  <%# メインイメージ %>
-  <header class="ly_header">
-    <div class="jumbotron main-visual">
-      <h1 class="font-weight-bold text-dark">第一印象って大事</h1>
-        <h2 class="text-dark">スカウターで「印象力」を鍛える　</h2>
-        <p class="logo-main-visual diplay-5">Scouter</p>
-    </div>
-  </header>
-  <p class="lead">
-    <%= link_to new_user_path, class: 'btn btn-warning btn-lg rounded-pill text-white font-weight-bold' do %>
-      <i class="fa-solid fa-heart"></i>　さっそくはじめる
-    <% end %>
-  </p>
-  <h3 class="mt-5">登録スカウターたちが写真でキミの「印象力」を計測！</h3>
-  <h3 class="mt-4">「年代別」のキミの評価もわかる。</h3>
-  <%= image_tag 'cell_phone.jpg', size: '320x240', class: 'rounded-circle my-5' %>
-  <%# 使い方ステップ %>
-  <h2 class="display-3 font-weight-bold">使い方</h2>
-  <p class="lead font-weight-bold text-danger">How To Use</p>
-  <p class="lead font-weight-bold">使い方はカンタン。</p>
-  <p class="my-5">だれかが自分の評価をすると自分の印象がわかります。<br />
-    また自分がだれかを評価していくと<span class="font-weight-bold text-danger">「1ポイント」</span>ずつポイントがたまり、<br />
-    <span class="font-weight-bold text-danger">「5ポイント」</span>たまると気になる人の評価をのぞくことができます。<br />
-    <small>（※ポイントなしにだれかが自分の評価をのぞくことはできません）</small>
-  </p>
-  <div class="card-deck text-center bg-lightblue pt-4">
-    <div class="card mb-4 border-0">
-        <div class="card-body mt-3 py-0 px-0">
-            <%= image_tag 'top_sub1.png', width: '300', class: 'border border-secondary rounded' %>
-        </div>
-        <div class="card-body">
-            <p class="btn btn-sm btn-info w-50 rounded-pill">STEP 1</p>
-            <p class="text-left mt-3 mb-4">
-                まずはどんどん評価していてポイントをためていこう！　　　　　　　　　　　　　
-            </p>
-        </div>
-    </div>
-    <div class="card mb-4 border-0">
-        <div class="card-body mt-3 py-0 px-0">
-            <%= image_tag 'top_sub2.png', width: '300', class: 'border border-secondary rounded' %>
-        </div>
-        <div class="card-body">
-            <p class="btn btn-sm btn-info w-50 rounded-pill">STEP 2</p>
-            <p class="text-left mt-3 mb-4">
-                所持ポイントが「5ポイント」以上になると気になる人の評価をのぞくことができる！
-            </p>
-        </div>
-    </div>
-    <div class="card mb-4 border-0">
-        <div class="card-body mt-3 py-0 px-0">
-            <%= image_tag 'top_sub3.png', width: '300', class: 'border border-secondary rounded' %>
-        </div>
-        <div class="card-body">
-            <p class="btn btn-sm btn-info w-50 rounded-pill">STEP 3</p>
-            <p class="text-left mt-3 mb-4">
-                相手が評価してくれるとマイページから自分の評価を確認できる！　　　　　　　　　
-            </p>
-        </div>
-    </div>
-</div>
-  
-  <div>
-    <p>
-      <%= link_to login_path, class: 'btn btn-success rounded-pill text-white mt-4' do %><i class="fa-solid fa-right-to-bracket lead"></i>　ログイン<% end %>
-    </p>
-    <p class="lead">
-      <%= link_to new_user_path, class: 'btn btn-warning btn-lg rounded-pill text-white font-weight-bold' do %>
-        <i class="fa-solid fa-heart"></i>　さっそくはじめる
-      <% end %>
-    </p>
-  </div>
-<% else %>
-  <% provide(:title, "スカウター一覧") %>
+<P class="py-3">- スカウター発動中 -</P>
 
-  <P class="large">- スカウターを発動中 -</P>
-  <p><%= @users.count %> 人</p>
+<%= render "shared/paginate" %>
 
-  <%= render "shared/paginate" %>
-
-  <div class="row">
-
-    <% @users.each do |user| %>
-    <div class="col-sm-3">
-      <div class="card mb-3">
-        <% if user.image.attached? %>
-          <%= image_tag user.image, class: 'card-img-top', alt: 'Card image cap' %>
-        <% else %>
-          <%= image_tag user_demo_image, class: 'card-img-top', alt: 'Card image cap' %>
+<div class="card-group-x">
+  <% @users.each do |user| %>
+    <div class="card-x">
+      <div class="card__imgframe-x">
+        <%= link_to user_path(user) do %>
+          <% if user.image.attached? %>
+            <%= image_tag user.image, class:'img-list border border-dark' %>
+          <% else %>
+            <%= image_tag user_demo_image, class:'img-list border border-dark' %>
+          <% end %>
         <% end %>
-        <div class="card-body">
-          <h5 class="card-title"><%= user.name %></h5>
-          <%= link_to "プロフィール", user_path(user), class: "btn btn-border rounded-pill" %>
-        </div>
       </div>
-    </div>  
-    <% end %>
-  </div>
+      <div class="card__textbox-x">
+        <p>
+          <%= user.name %><br />
+          <%= link_to "プロフィール", user_path(user), class: "btn btn-border small" %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>
 
-  <%= render "shared/paginate" %>
-  
- <% end %>
+<%= render "shared/paginate" %>

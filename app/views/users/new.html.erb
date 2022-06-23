@@ -1,5 +1,5 @@
 <% provide(:title, "まずはプロフィールを作成！") %>
 
-<p class="lead mt-5 pt-5 mb-3"><%= yield(:title) %></p>
+<p class="lead mt-5 mb-3"><%= yield(:title) %></p>
 
 <%= render partial: 'form', locals: { user: @user } %>

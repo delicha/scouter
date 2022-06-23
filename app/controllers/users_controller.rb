@@ -1,14 +1,13 @@
 class UsersController < ApplicationController
-  skip_before_action :login_required, only: [:index, :new, :create]
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :correct_user]
-  before_action :correct_user, only: [:create, :edit, :destroy]
+  before_action :authenticate_user!
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :correct_user, :purge_image]
 
   def index
     if current_user
       @users = if current_user.sex == 0
-                 User.where(sex: 1).order('RANDOM()').paginate(page: params[:page], per_page: 8)
+                 User.where(sex: 1).order('updated_at DESC').paginate(page: params[:page], per_page: 6)
                else
-                 User.where(sex: 0).order('RANDOM()').paginate(page: params[:page], per_page: 8)
+                 User.where(sex: 0).order('updated_at DESC').paginate(page: params[:page], per_page: 6)
                end
     end
   end
@@ -33,12 +32,17 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
-      redirect_to users_url, notice: "「#{@user.name}」さんはプロフィールを更新しました。"
-    else
-      render :edit
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { redirect_to @user, notice: "「#{@user.name}」さんはプロフィールを更新しました。" }
+        format.json { render :show, status: :ok, location: @user }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
+
 
   def destroy
     @user.destroy
@@ -51,11 +55,15 @@ class UsersController < ApplicationController
     flash[:notice] = "5ポイント消化。(所持ポイント#{@point})"
   end
 
+  def purge_image
+    @user.image.purge
+    redirect_back fallback_location: user_path(@user), notice: "画像は削除されました。"
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :admin, :password, :password_confirmation, :sex, :character, :hobby,
-                                 :generation, :point, :image, :sub_image_1, :sub_image_2)
+    params.require(:user).permit(:name, :email, :admin, :password, :sex, :character, :hobby, :generation, :point, :image, sub_images: [])
   end
 
   def set_user

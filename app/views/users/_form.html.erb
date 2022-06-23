@@ -46,29 +46,28 @@
         <td>
           <%= f.file_field :image, class: "form-control" %>
           <% if user.image.attached? %>
-            <%= image_tag user.image, height:30 %><span class="small">選択されている画像。</span>
+            <div class="d-flex justify-content-start mt-2">
+              <%= image_tag user.image.variant(resize: "30x30"), class:'px-2' %><span class="small">選択画像</span>
+            </div>
           <% else %>
             <span class="small">画像がありません。</span>
           <% end %>
         </td>
       </tr>
       <tr>
-        <th><%= f.label :sub_image_1, 'サブ画像１', class: "text-muted" %></th>
+        <th><%= f.label :sub_images, 'サブ画像', class: "text-muted" %><br /><span class="small text-danger">(サブ画像は２枚まで選択可)</span></th>
         <td>
-          <%= f.file_field :sub_image_1, class: "form-control" %>
-          <% if user.sub_image_1.attached? %>
-            <%= image_tag user.sub_image_1, height:30 %><span class="small">選択されている画像。</span>
-          <% else %>
-            <span class="small">画像がありません。</span>
-          <% end %>
-        </td>
-      </tr>
-      <tr>
-        <th><%= f.label :sub_image_2, 'サブ画像２', class: "text-muted" %></th>
-        <td>
-          <%= f.file_field :sub_image_2, class: "form-control" %>
-          <% if user.sub_image_2.attached? %>
-            <%= image_tag user.sub_image_2, height:30 %><span class="small">選択されている画像。</span>
+          <%= f.file_field :sub_images, multiple: true, class: "form-control" %>
+          <% if user.sub_images.attached? %>
+            <div class="d-flex justify-content-start mt-2">
+              <% @user.sub_images.each do |sub_image| %>
+                <%= f.check_box :sub_image_ids, { multiple: true }, sub_image.id, false %>
+                <label for="user_sub_image_ids_<%= sub_image.id %>">
+                  <%= image_tag sub_image.variant(resize: "30x30"), class:'px-2' %>
+                </label>
+              <% end %>
+              <p class="small">選択画像(※削除する画像にチェックをつけてください)</p>
+            </div>
           <% else %>
             <span class="small">画像がありません。</span>
           <% end %>

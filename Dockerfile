@@ -12,6 +12,9 @@ COPY Gemfile.lock /scouter/Gemfile.lock
 RUN gem install bundler
 RUN bundle install
 
+RUN bundle config set with production
+RUN bundle config set without test development
+
 RUN mkdir -p tmp/sockets
 
 COPY entrypoint.sh /usr/bin/

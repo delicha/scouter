@@ -1,0 +1,81 @@
+
+  <% provide(:title, "トップページ") %>
+
+  <%# メインイメージ %>
+  <header class="ly_header">
+    <div class="jumbotron main-visual">
+      <h1 class="font-weight-bold text-dark">第一印象って大事</h1>
+      <h2 class="text-dark">スカウターで「印象力」を鍛える　</h2>
+      <p class="logo-main-visual diplay-5">Scouter</p>
+      <p>
+        <%= link_to new_user_session_path, class: 'btn btn-info rounded-pill text-white font-weight-bold' do %>
+          <i class="fa-solid fa-right-to-bracket lead"></i>　ログイン
+        <% end %>
+      </p>
+    </div>
+  </header>
+  <h3 class="py-2">まずは登録！</h3>
+  <p class="lead">
+    <%= link_to new_user_registration_path, class: 'button02 font-weight-bold' do %>
+      <i class="fa-solid fa-heart"></i>　さっそくはじめる
+    <% end %>
+  </p>
+  <h3 class="mt-5">登録スカウターたちが写真でキミの「印象力」を計測！</h3>
+  <h3 class="mt-4">「年代別」のキミの評価もわかる。</h3>
+  <%= image_tag 'cell_phone.jpg', size: '320x240', class: 'rounded-circle my-5' %>
+  <%# 使い方ステップ %>
+  <h2 class="display-3 font-weight-bold">使い方</h2>
+  <p class="lead font-weight-bold text-danger">How To Use</p>
+  <p class="lead font-weight-bold">使い方はカンタン。</p>
+  <p class="my-5">だれかが自分の評価をすると自分の印象がわかります。<br />
+    また自分がだれかを評価していくと<span class="font-weight-bold text-danger">「1ポイント」</span>ずつポイントがたまり、<br />
+    <span class="font-weight-bold text-danger">「5ポイント」</span>たまると気になる人の評価をのぞくことができます。<br />
+    <small>（※ポイントなしにだれかが自分の評価をのぞくことはできません）</small>
+  </p>
+  <div class="card-deck text-center bg-lightblue pt-4">
+    <div class="card mb-4 border-0">
+        <div class="card-body mt-3 py-0 px-0">
+            <%= image_tag 'top_sub1.png', width: '250', class: 'border border-secondary rounded' %>
+        </div>
+        <div class="card-body">
+            <p class="btn btn-sm btn-info w-50 rounded-pill">STEP 1</p>
+            <p class="text-left mt-3 mb-4">
+                まずはどんどん評価していてポイントをためていこう！　　　　　　　　　　　　　
+            </p>
+        </div>
+    </div>
+    <div class="card mb-4 border-0">
+        <div class="card-body mt-3 py-0 px-0">
+            <%= image_tag 'top_sub2.png', width: '250', class: 'border border-secondary rounded' %>
+        </div>
+        <div class="card-body">
+            <p class="btn btn-sm btn-info w-50 rounded-pill">STEP 2</p>
+            <p class="text-left mt-3 mb-4">
+                所持ポイントが「5ポイント」以上になると気になる人の評価をのぞくことができる！
+            </p>
+        </div>
+    </div>
+    <div class="card mb-4 border-0">
+        <div class="card-body mt-3 py-0 px-0">
+            <%= image_tag 'top_sub3.png', width: '250', class: 'border border-secondary rounded' %>
+        </div>
+        <div class="card-body">
+            <p class="btn btn-sm btn-info w-50 rounded-pill">STEP 3</p>
+            <p class="text-left mt-3 mb-4">
+                相手が評価してくれるとマイページから自分の評価を確認できる！　　　　　　　　　
+            </p>
+        </div>
+    </div>
+</div>
+  
+  <div>
+    <p class="lead">
+      <%= link_to new_user_registration_path, class: 'button02 mt-4 font-weight-bold' do %>
+        <i class="fa-solid fa-heart"></i>　さっそくはじめる
+      <% end %>
+    </p>
+    <p>
+      <%= link_to new_user_session_path, class: 'button03 btn-info mt-4 font-weight-bold' do %><i class="fa-solid fa-right-to-bracket lead"></i>　ログイン<% end %>
+    </p>
+  </div>
+

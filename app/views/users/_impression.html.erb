@@ -1,11 +1,11 @@
 <p>
-  <i class="fa-solid fa-chart-simple fa-3x mt-5 text-danger"></i>
+  <i class="fa-solid fa-chart-simple fa-3x mt-5 text-brown"></i>
 </p>
-<h3 class="text-danger mb-4">- <%= @user.name %>さんの印象は？ -</h3>
+<h3 class="text-brown mb-4">- <%= @user.name %>さんの印象は？ -</h3>
 
-<div class="bg-lightred py-3">
-  <p class="lead">Total</p>
-  <div class="display-3 text-danger">
+<div class="bg-white rounded-corner border py-5">
+  <p class="lead font-weight-bold">Total</p>
+  <div class="display-4 text-danger">
     <%= impression_total %>
   </div><small>/100</small>
   <p class="text-danger lead font-weight-bold mt-2"><%= impression_comment(@user.sex) %></p>
@@ -13,16 +13,16 @@
 </div>
 
 <p>
-  <i class="fa-solid fa-user-group fa-3x  mt-5 text-info"></i>
+  <i class="fa-solid fa-user-group fa-3x  mt-5 text-brown"></i>
 </p>
-<h3 class="text-info py-3">- 世代別支持率 -</h3>
-<div class="bg-lightblue py-3">
-  <p class="lead">10代：<span class="text-info"><%= impression_each_generation(0) %></span></p>
-  <p class="lead">20代：<span class="text-info"><%= impression_each_generation(1) %></span></p>
-  <p class="lead">30代：<span class="text-info"><%= impression_each_generation(2) %></span></p>
-  <p class="lead">40代：<span class="text-info"><%= impression_each_generation(3) %></span></p>
-  <p class="lead">50代：<span class="text-info"><%= impression_each_generation(4) %></span></p>
-  <p class="lead">60代以上：<span class="text-info"><%= impression_each_generation(5) %></span></p>
+<h3 class="text-brown py-3">- 世代別支持率 -</h3>
+<div class="bg-white rounded-corner border py-5">
+  <p class="lead">10代：<%= impression_graph(0) %><span class="text-info pl-2">（<%= impression_each_generation(0) %>）</span></p>
+  <p class="lead">20代：<%= impression_graph(1) %><span class="text-info pl-2">（<%= impression_each_generation(1) %>）</span></p>
+  <p class="lead">30代：<%= impression_graph(2) %><span class="text-info pl-2">（<%= impression_each_generation(2) %>）</span></p>
+  <p class="lead">40代：<%= impression_graph(3) %><span class="text-info pl-2">（<%= impression_each_generation(3) %>）</span></p>
+  <p class="lead">50代：<%= impression_graph(4) %><span class="text-info pl-2">（<%= impression_each_generation(4) %>）</span></p>
+  <p class="lead">60代以上：<%= impression_graph(5) %><span class="text-info pl-2">（<%= impression_each_generation(5) %>）</span></p>
 </div>
 
 

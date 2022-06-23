@@ -2,19 +2,12 @@
 
 <p class="mt-3">スカウター<span class="small">（男性人 <%= @male.count %> / 女性<%= @female.count %>人）</span>管理</p>
 
-<div class="text-center">
-    <%= link_to new_admin_user_path, class: 'btn btn-warning rounded-pill font-weight-bold my-3 btn-lg text-white' do %>
-        <i class="fa-solid fa-circle-plus lead"></i>　新スカウター作成
-    <% end %>
-</div>
-
 <%= render "shared/paginate" %> 
 
-<table class="table table-hover shadow-sm my-3">
-    <thead class="thead-default">
+<table class="table table-hover bg-white shadow-sm my-3">
+    <thead class="thead-default bg-light">
         <tr class="text-center">
             <th><%= sort_link(@q, :id, [:id, "created_at desc"], class: "text-info") %></th>
-            <th><%= User.human_attribute_name(:image) %></th>
             <th><%= sort_link(@q, :name, [:name, "updated_at desc"], class: "text-info") %></th>
             <th><%= sort_link(@q, :sex, [:sex, "updated_at desc"], class: "text-info") %></th>
             <th><%= sort_link(@q, :generation, [:generation, "updated_at desc"], class: "text-info") %></th>
@@ -28,21 +21,21 @@
         <tr>
             <td><%= user.id %></td>
             <td>
-            <% if user.image.attached? %>
-                <%= image_tag user.image, height:50   %>
-            <% else %>
-                <%=image_tag "default_profile_img.png", height:50 %>
-            <% end %>
+                <%= user.name %><br />
+                <% if user.image.attached? %>
+                    <%= image_tag user.image, width:30   %>
+                <% else %>
+                    <%=image_tag "default_profile_img.png", width:30 %>
+                <% end %>
             </td>
-            <td><%= user.name %></td>
             <td><%= set_sex(user) %></td>
             <td><%=  set_generation(user) %></td>
             <td><%= user.point %></td>
             <td class="text-center font-weight-bold"><%= user.admin? ? '有' : '無' %></td>
             <td>
-                <%= link_to "詳細", admin_user_path(user), class: "text-secondary" %>
-                <%= link_to "編集", edit_admin_user_path(user), class: "px-2 text-info" %>
-                <%= link_to "削除", admin_user_path(user), method: :delete, data: { confirm: "ユーザー「#{user.name}」を削除します。よろしいですか？"}, class: "text-danger" %>
+                <%= link_to "詳細", user_path(user.id), class: "text-secondary" %><br />
+                <%= link_to "編集", edit_user_registration_path, class: "text-info" %><br />
+                <%= link_to "削除", user_path(user.id), method: :delete, data: { confirm: "ユーザー「#{user.name}」を削除します。よろしいですか？"}, class: "text-danger" %>
             </td>
         </tr>
     <% end %>    

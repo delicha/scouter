@@ -7,14 +7,66 @@
 
 body {
   padding-top: 70px;
+  padding-bottom: 50px;
+}
+
+.body-color {
+  background: #f0ece6;
+}
+
+.text-chocolate {
+  color: #9e8484;
+}
+
+.text-brown {
+  color: #7a6666;
+}
+
+.text-wine {
+  color: #87091A;
+}
+
+.bg-brown {
+  background: #7a6666;
+}
+
+.bg-wine {
+  background: #87091A;
+}
+
+.bg-deepblue {
+  background: #0E376F;
 }
 
 .bg-lightblue {
-  background-color: #def9fc;
+  background: #C1CFCE;
 }
 
-.bg-lightred {
-  background-color: #f9e5e5;
+.bg-orange {
+  background: #E3A93B;
+}
+
+.rounded-corner {
+  border-radius: 30px 30px 0 0;
+}
+
+.text-divider {
+  display: flex;
+  align-items: center;
+  --text-divider-gap: 1rem;
+}
+.text-divider::before,
+.text-divider::after {
+  content: '';
+  height: 1px;
+  background-color: #555;
+  flex-grow: 1;
+}
+.text-divider::before {
+  margin-right: var(--text-divider-gap);
+}
+.text-divider::after {
+  margin-left: var(--text-divider-gap);
 }
 
 .logo {
@@ -24,6 +76,18 @@ body {
   font-size: 230px;
   color: #000;
 }
+
+/*footer*/
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: #f0ece6;
+  padding: 15px 0;
+}
+
 /*メインビジュアル*/
 
 .jumbotron {
@@ -41,13 +105,13 @@ body {
   background-size: cover;
 
   h1 {
-    margin-top: 80px;
+    margin-top: 60px;
     font-size: 85px;
     text-align: right;
     text-shadow: 2px 2px 2px #fff
   }
   h2 {
-    margin-top: 50px;
+    margin-top: 30px;
     text-align: right;
     text-shadow: 2px 2px 2px #fff
   }
@@ -64,12 +128,71 @@ body {
   text-shadow: 1px 2px 2px #808080
 }
 
+/*ユーザープロフカード*/
+.card-prof {
+  margin: 0 auto;
+  width: 350px;
+  background: #fff;
+  border-radius: 15px 15px 0 0;
+  box-shadow: 0 2px 5px #ccc;
+}
+.card-prof-img {
+  border-radius: 15px 15px 0 0;
+  max-width: 100%;
+  height: auto;
+}
+.card-prof-content {
+  padding: 20px;
+  padding-top: 0;
+}
+
+/*ユーザー一覧ページ*/
+.card-group-x{
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: auto;
+  /* ポイント１ */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+/* ポイント２ */
+// .card-group-x > :nth-child(2n){
+//   margin-left: 20px;
+// }
+.card-x{
+/* ポイント４ */
+  // width: calc((100% - 20px * 1) / 2);
+  width: 170px;
+  height: auto;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+.img-list{
+  width: 130px;
+  height: 130px;
+  border-radius: 80px;
+  object-fit: cover;
+}
+.card__textbox-x{
+  width: 100%;
+  height: auto;
+  padding: 20px 18px;
+  background: #f0ece6;
+  box-sizing: border-box;
+}
+.card__textbox-x > * + *{
+  margin-top: 10px;
+}
+
 /*評価ページ*/
 .impression-body {
   margin: auto;
   width: 100%;
-  height: 400px;
-  padding: 16px;
+  padding: 10px;
+  padding-bottom: 0;
   box-sizing: border-box;
   // background: #BADA55;
   font-family: 'Roboto';
@@ -405,9 +528,14 @@ input[type="radio"]:checked ~ .bullet .line.seven{
   justify-content: center;
 }
 
+.page-link {          
+  background: #f0ece6;
+}
+
 .pagination>li>a {          
   border: none;     /*枠線をなくす*/
   color: #696969;   /*文字の色を変える*/
+  border-radius: 30px; 
 }
 
 /* 表示しているページ番号のデザイン */
@@ -426,11 +554,6 @@ input[type="radio"]:checked ~ .bullet .line.seven{
   background: #17a2b8; 
   border-color: #17a2b8;
   border-radius: 30px; 
-}
-
-/*ホバー時のデザイン*/
-.pagination>li>a:hover {        
-  border-radius: 30px;    /*角を丸くする*/
 }
 
 
@@ -453,12 +576,12 @@ html {
 .btn,
 a.btn,
 button.btn {
-  font-size: 90%;
+  font-size: 60%;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1.3;
   position: relative;
   display: inline-block;
-  padding: 0.7rem 2rem;
+  padding: 0.7rem 1.5rem;
   margin-top: 1rem;
   cursor: pointer;
   -webkit-user-select: none;
@@ -492,7 +615,7 @@ a.btn-border:after {
   -webkit-transition: all .3s;
   transition: all .3s;
 
-  background: #666;
+  background: rgb(145, 144, 144);
 }
 
 a.btn-border:before {
@@ -510,7 +633,71 @@ a.btn-border:hover:after {
   width: 0;
 }
 
+/* ボタン２ */
 
+.button02{
+  display:block;
+  margin: 0 auto;
+  width: 300px;
+  height:60px;
+  line-height: 60px;
+  color: #FFF;
+  text-decoration: none;
+  text-align: center;
+  background-color: #f39800; /*ボタン色*/
+  border-radius: 20px; /*角丸*/
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  border: none;
+}
+.button02:hover{
+  background-color: #f9c500; /*ボタン色*/
+  color: #FFF;
+}
+
+/* ボタン3 */
+
+.button03{
+  display:block;
+  margin: 0 auto;
+  width: 300px;
+  height:60px;
+  line-height: 60px;
+  color: #FFF;
+  text-decoration: none;
+  text-align: center;
+  background-color: #7a6666; /*ボタン色*/
+  border-radius: 20px; /*角丸*/
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  border: none;
+}
+.button03:hover{
+  background-color: #87091a; /*ボタン色*/
+  color: #FFF;
+}
+
+/* ボタン4 */
+
+.button04{
+  display:block;
+  margin: 0 auto;
+  width: 300px;
+  height:60px;
+  line-height: 60px;
+  color: #FFF;
+  text-decoration: none;
+  text-align: center;
+  background-color: #74c6d3; /*ボタン色*/
+  border-radius: 20px; /*角丸*/
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  border: none;
+}
+.button04:hover{
+  background-color: #0e376f; /*ボタン色*/
+  color: #FFF;
+}
 
 /* メディアクエリ適用寺 */
 
@@ -554,17 +741,20 @@ a.btn-border:hover:after {
 
     h1 {
       font-size: 33px;
-
+      text-align: right;
     }
     h2 {
       font-size: 20px;
-
+      text-align: right;
+      margin-right: -15px;
     }
   }
 
   .logo-main-visual {
     font-size: 120px;
-    padding-top: 30px;
+    text-align: right;
+    margin-right: -20px;
+    padding-bottom: 20px;
   }
   
 }

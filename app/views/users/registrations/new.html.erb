@@ -1,0 +1,89 @@
+<% provide(:title, "まずはプロフィールを作成！") %>
+
+<p class="lead mb-3"><%= yield(:title) %></p>
+
+<span class="small text-danger">※は必須項目</span>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= render "devise/shared/error_messages", resource: resource %>
+
+  <table class="table table-hover shadow-sm bg-white">
+    <tbody>
+      <tr>
+        <th><%= f.label :name, '名前', class: "text-muted" %><span class="small text-danger">※</span></th>
+        <td><%= f.text_field :name, autofocus: true, class: "form-control" %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :email, 'メールアドレス', class: "text-muted" %><span class="small text-danger">※</span></th>
+        <td><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :password, 'パスワード', class: "text-muted" %><span class="small text-danger">※<br />
+          <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> 文字以上)</em>
+          <% end %>
+        </span></th>
+        <td><%= f.password_field :password, autocomplete: "new-password", class: "form-control" %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :password_confirmation, 'パスワード（確認）', class: "text-muted" %><span class="small text-danger">※</span></th>
+        <td><%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :sex, '性別', class: "text-muted" %><span class="small text-danger">※</span></th>
+        <td><%= f.select :sex, [['女性', 0], ['男性', 1]], {}, { id: "sex", class: "form-control" } %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :hobby, '趣味', class: "text-muted" %></th>
+        <td><%= f.text_field :hobby, placeholder: "(例) テニス、Youtube鑑賞 etc", class: "form-control" %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :character, '性格', class: "text-muted" %></th>
+        <td><%= f.text_field :character, placeholder: "(例) 温和、我慢強い etc",class: "form-control" %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :generation, '世代', class: "text-muted" %><span class="small text-danger">※</span></th>
+        <td><%= f.select :generation, [['10代', 0], ['20代', 1], ['30代', 2],['40代', 3],['50代', 4],['60代以上', 5]],{}, { id: "generation", class: "form-control" } %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :image, 'トップ画像', class: "text-muted" %><span class="small text-danger">※</span></th>
+        <td>
+          <%= f.file_field :image, class: "form-control" %>
+          <% if @user.image.attached? %>
+            <div class="d-flex justify-content-start mt-2">
+              <%= image_tag user.image.variant(resize: "30x30"), class:'px-2' %><span class="small">選択画像</span>
+            </div>
+          <% else %>
+            <span class="small">画像がありません。</span>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <th><%= f.label :sub_images, 'サブ画像', class: "text-muted" %><br /><span class="small text-danger">(サブ画像は２枚まで選択可)</span></th>
+        <td>
+          <%= f.file_field :sub_images, multiple: true, class: "form-control" %>
+          <% if @user.sub_images.attached? %>
+            <div class="d-flex justify-content-start mt-2">
+              <% @user.sub_images.each do |sub_image| %>
+                <%= f.check_box :sub_image_ids, { multiple: true }, sub_image.id, false %>
+                <label for="user_sub_image_ids_<%= sub_image.id %>">
+                  <%= image_tag sub_image.variant(resize: "30x30"), class:'px-2' %>
+                </label>
+              <% end %>
+              <p class="small">選択画像(※削除する画像にチェックをつけてください)</p>
+            </div>
+          <% else %>
+            <span class="small">画像がありません。</span>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="text-center">
+    <%= f.submit "登録する", class: "button03 btn-info" %>
+  </div>
+<% end %>
+
+<div class="mt-2">
+  <%= render "users/shared/links" %>
+</div>
