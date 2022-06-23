@@ -6,6 +6,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 50 }
   validates :character, length: { maximum: 50 }
   validates :hobby, length: { maximum: 50 }
+
   validates :image, 
     # presence: true,
     content_type: [:png, :jpg, :jpeg, :heic],
@@ -17,6 +18,7 @@ class User < ApplicationRecord
 
   FILE_NUMBER_LIMIT = 2
   validate :validate_number_of_sub_images
+
 
   has_many :evaluations, dependent: :destroy
   has_one_attached :image
